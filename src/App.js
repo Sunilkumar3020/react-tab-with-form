@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Tab from "./components/Tab";
+import { FormProvider } from "./context/FormContext";
+
+import TabContent from "./components/TabContent";
 
 function App() {
+  const [activeTab, setActiveTab] = useState('Profile')
+  const tabs = ['Profile', 'Interest', 'Settings']
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <FormProvider>
+      <Tab tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      <TabContent activeTab={activeTab} />
+    </FormProvider>
+  )
 }
 
 export default App;
